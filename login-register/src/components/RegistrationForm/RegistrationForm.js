@@ -1,51 +1,31 @@
-import React, {useState} from 'react';
-function RegistrationForm(props) {
+import React from 'react';
+export default function RegistrationForm(props) {
 
-    const handleSubmitClick = (e) => {
-        e.preventDefault();
-        if(state.password === state.confirmPassword) {
-            sendDetailsToServer()    
-        } else {
-            props.showError('Passwords do not match');
-        }
-    }
+    const {
+        values,
+        onInputChange,
+        onSubmit
+    } = props;
 
   return(
         <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
-            <form>
+            <form onSubmit={onSubmit}>
                 <div className="form-group text-left">
-                <label htmlFor="exampleInputEmail1">Email address</label>
-                <input type="email" 
-                       className="form-control" 
-                       id="email" 
-                       aria-describedby="emailHelp" 
-                       placeholder="Enter email"
-                />
-                <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+                <label htmlFor="email">Email address</label>
+                <input type="email" className="form-control" id="email" placeholder="Email"
+                    onChange={onInputChange} />
                 </div>
                 <div className="form-group text-left">
-                    <label htmlFor="exampleInputPassword1">Password</label>
-                    <input type="password" 
-                        className="form-control" 
-                        id="password" 
-                        placeholder="Password"
-                    />
+                    <label htmlFor="password">Password</label>
+                    <input type="password" className="form-control" id="password" placeholder="Password"
+                        onChange={onInputChange} />
                 </div>
                 <div className="form-group text-left">
-                    <label htmlFor="exampleInputPassword1">Confirm Password</label>
-                    <input type="password" 
-                        className="form-control" 
-                        id="confirmPassword" 
-                        placeholder="Confirm Password"
-                    />
+                    <label htmlFor="confirmPassword">Confirm Password</label>
+                    <input type="password" className="form-control" id="confirmPassword" placeholder="Confirm Password"
+                        onChange={onInputChange} />
                 </div>
-                <button 
-                    type="submit" 
-                    className="btn btn-primary"
-                    onClick={handleSubmitClick}
-                >
-                    Register
-                </button>
+                <button type="submit" className="btn btn-primary">Register</button>
             </form>
         </div>
     )
