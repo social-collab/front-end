@@ -21,6 +21,9 @@ function App() {
     })
   }
 
+  const initialError = '';
+  const [error, setError] = useState(initialError);
+
   const onSubmit = (event) => {
     event.preventDefault();
 
@@ -28,10 +31,13 @@ function App() {
 
     if((!formValues.email) || (!formValues.password) || (!formValues.confirmPasword)) {
       // Failed - All fields are required
-    } else if(formValues.password === formValues.confirmPassword) {
+      setError('All Fields are Required');
+    } else if(formValues.password !== formValues.confirmPassword) {
       // Failed - Passwords do not match
+      setError('Passwords Do Not Match');
     } else {
       // YAY! We can log user in
+      // REACT 2 SHOULD USE THIS SPACE TO REGISTER USER TO DATABASE
       const newUser = { ...formValues }
       setFormValues(initialFormValues);
     }
@@ -45,6 +51,7 @@ return (
           <Switch>
             <Route path="/" exact={true}>
               <RegistrationForm
+                error={error}
                 values={formValues}
                 onInputChange={onInputChange}
                 onSubmit={onSubmit}
